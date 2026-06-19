@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)file:///Users/jonmiller/Downloads/iowa_dashboard.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Iowa Hawkeyes Football — 25 Years of National Rankings (2001-2025)</title>
+<script src="./index_files/chart.umd.min.js"></script>
+<style>
+  :root{
+    --black:#0d0d0d;
+    --gold:#FFCD00;
+    --gold-dim:#c9a300;
+    --cream:#f5f1e6;
+    --grey:#3a3a3a;
+    --good:#2e7d4f;
+    --bad:#b3392b;
+    --panel:#161616;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--black);
+    color:var(--cream);
+    font-family:'Oswald', 'Arial Narrow', Arial, sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3{
+    font-family: 'Georgia', 'Times New Roman', serif;
+    letter-spacing:0.5px;
+    color:var(--gold);
+    margin:0;
+  }
+  .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
+  header{
+    text-align:center;
+    padding:30px 10px 26px;
+    border-bottom:3px solid var(--gold);
+    margin-bottom:30px;
+  }
+  header .eyebrow{
+    text-transform:uppercase;
+    font-size:13px;
+    letter-spacing:3px;
+    color:var(--gold-dim);
+    margin-bottom:8px;
+  }
+  header h1{font-size:38px;}
+  header p.sub{color:#bbb;margin-top:10px;font-size:15px;}
+
+  .stat-strip{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:40px;
+  }
+  .stat-card{
+    background:var(--panel);
+    border:1px solid #2a2a2a;
+    border-left:4px solid var(--gold);
+    padding:16px 14px;
+    border-radius:4px;
+  }
+  .stat-card .num{font-size:28px;font-weight:700;color:var(--gold);font-family:Georgia,serif;}
+  .stat-card .lab{font-size:12px;color:#bbb;text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+  .stat-card .sub{font-size:12px;color:#888;margin-top:2px;}
+
+  section{margin-bottom:48px;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:6px;
+    border-bottom:1px solid #2a2a2a;
+    padding-bottom:10px;
+  }
+  .section-head h2{font-size:22px;}
+  .section-head .num-tag{
+    font-family:Georgia,serif;font-size:13px;color:var(--black);
+    background:var(--gold);padding:2px 9px;border-radius:3px;font-weight:700;
+  }
+  p.lede{color:#ccc;font-size:15px;max-width:760px;}
+
+  .chart-box{
+    background:var(--panel);
+    border:1px solid #2a2a2a;
+    border-radius:6px;
+    padding:20px;
+    margin-top:16px;
+  }
+  .chart-box.tall{height:380px;}
+  .chart-box.med{height:320px;}
+
+  .toggle-row{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap;}
+  .toggle-btn{
+    background:transparent;border:1px solid #444;color:#ccc;
+    padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;
+    font-family:inherit;letter-spacing:0.3px;transition:all .15s;
+  }
+  .toggle-btn:hover{border-color:var(--gold);color:var(--gold);}
+  .toggle-btn.active{background:var(--gold);color:var(--black);border-color:var(--gold);font-weight:600;}
+
+  table.heat{
+    width:100%;
+    border-collapse:collapse;
+    font-size:11.5px;
+    margin-top:10px;
+  }
+  table.heat th, table.heat td{
+    padding:5px 4px;
+    text-align:center;
+    border:1px solid #1c1c1c;
+  }
+  table.heat th{
+    background:#1c1c1c;color:var(--gold);font-weight:600;
+    position:sticky; top:0;
+  }
+  table.heat td.catname{
+    text-align:left;color:var(--cream);font-weight:600;background:#1a1a1a;
+    position:sticky; left:0; min-width:130px;
+  }
+  table.heat-scroll{overflow-x:auto;}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media(max-width:760px){.two-col{grid-template-columns:1fr;} .stat-strip{grid-template-columns:repeat(2,1fr);}}
+
+  .callout-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px;}
+  @media(max-width:760px){.callout-grid{grid-template-columns:1fr;}}
+  .callout{
+    background:var(--panel);border:1px solid #2a2a2a;border-radius:6px;padding:16px 18px;
+  }
+  .callout h3{font-size:15px;color:var(--gold);margin-bottom:8px;}
+  .callout .row{display:flex;justify-content:space-between;font-size:13.5px;padding:3px 0;color:#ddd;}
+  .callout .row b{color:var(--gold);}
+  .pill-good{color:var(--good);font-weight:700;}
+  .pill-bad{color:var(--bad);font-weight:700;}
+
+  footer{
+    text-align:center;color:#666;font-size:12px;margin-top:40px;
+    border-top:1px solid #2a2a2a;padding-top:20px;
+  }
+  .legend-note{font-size:12.5px;color:#999;margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">National Statistical Rankings · 2001 – 2025</div>
+    <h1>IOWA HAWKEYES FOOTBALL</h1>
+    <p class="sub">25 seasons of where Iowa ranked among every FBS team, category by category.<br>Rank 1 = best in the country. Higher number = worse. Field size grew from 115 teams (2001) to 134 (2025).</p>
+  </header>
+
+  <div class="stat-strip" id="statStrip"><div class="stat-card"><div class="num">79%ile</div><div class="lab">25-yr Avg Defense</div><div class="sub">vs 41%ile offense</div></div><div class="stat-card"><div class="num">#3</div><div class="lab">Best Total D Rank</div><div class="sub">2022, out of 130 teams</div></div><div class="stat-card"><div class="num">#130/130</div><div class="lab">Worst Total Off Ranks</div><div class="sub">back-to-back, 2022 &amp; 2023</div></div><div class="stat-card"><div class="num">2002</div><div class="lab">Best All-Around Season</div><div class="sub">2012 was the worst</div></div></div>
+
+  <section>
+    <div class="section-head"><h2>The Defining Pattern</h2><span class="num-tag">01</span></div>
+    <p class="lede">Iowa's identity for a quarter-century has been built on one unmistakable split: elite, often top-15-nationally defense, paired with offense that — outside two standout stretches — has lived in the bottom half of the country. The gap between the two units is the single biggest story in this data.</p>
+    <div class="chart-box tall"><canvas id="offDefChart" width="1120" height="372" style="display: block; box-sizing: border-box; height: 338px; width: 1018px;"></canvas></div>
+    <p class="legend-note">Percentile shown so seasons are comparable across changing field sizes (115→134 teams). 100% = ranked #1 nationally that year; 0% = ranked last.</p>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Category Trends</h2><span class="num-tag">02</span></div>
+    <p class="lede">Pick a unit to see every category inside it tracked across all 25 seasons.</p>
+    <div class="toggle-row" id="catToggle"><button class="toggle-btn">Offense</button><button class="toggle-btn active">Defense</button><button class="toggle-btn">Special Teams</button><button class="toggle-btn">Turnovers</button></div>
+    <div class="chart-box tall"><canvas id="categoryChart" width="1120" height="372" style="display: block; box-sizing: border-box; height: 338px; width: 1018px;"></canvas></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Best &amp; Worst Seasons, By Category</h2><span class="num-tag">03</span></div>
+    <p class="lede">Every category's national rank in its high-water and low-water year. Notice how many "worst ever" marks cluster in 2022–2024.</p>
+    <div class="callout-grid" id="bestWorstGrid"><div class="callout">
+    <h3>Rushing Off</h3>
+    <div class="row">Best: <b>2002</b> <span class="pill-good">rank 17 / 117</span></div>
+    <div class="row">Worst: <b>2022</b> <span class="pill-bad">rank 124 / 130</span></div>
+  </div><div class="callout">
+    <h3>Passing Off</h3>
+    <div class="row">Best: <b>2005</b> <span class="pill-good">rank 27 / 117</span></div>
+    <div class="row">Worst: <b>2024</b> <span class="pill-bad">rank 129 / 133</span></div>
+  </div><div class="callout">
+    <h3>Total Off</h3>
+    <div class="row">Best: <b>2002</b> <span class="pill-good">rank 13 / 117</span></div>
+    <div class="row">Worst: <b>2022</b> <span class="pill-bad">rank 130 / 130</span></div>
+  </div><div class="callout">
+    <h3>Scoring Off</h3>
+    <div class="row">Best: <b>2002</b> <span class="pill-good">rank 7 / 117</span></div>
+    <div class="row">Worst: <b>2023</b> <span class="pill-bad">rank 129 / 130</span></div>
+  </div><div class="callout">
+    <h3>Passing Efficiency</h3>
+    <div class="row">Best: <b>2002</b> <span class="pill-good">rank 2 / 117</span></div>
+    <div class="row">Worst: <b>2023</b> <span class="pill-bad">rank 130 / 130</span></div>
+  </div><div class="callout">
+    <h3>Rushing Def</h3>
+    <div class="row">Best: <b>2002</b> <span class="pill-good">rank 5 / 117</span></div>
+    <div class="row">Worst: <b>2014</b> <span class="pill-bad">rank 64 / 128</span></div>
+  </div><div class="callout">
+    <h3>Passing Def</h3>
+    <div class="row">Best: <b>2009</b> <span class="pill-good">rank 4 / 120</span></div>
+    <div class="row">Worst: <b>2002</b> <span class="pill-bad">rank 110 / 117</span></div>
+  </div><div class="callout">
+    <h3>Pass Efficiency Def</h3>
+    <div class="row">Best: <b>2009</b> <span class="pill-good">rank 3 / 120</span></div>
+    <div class="row">Worst: <b>2005</b> <span class="pill-bad">rank 77 / 117</span></div>
+  </div><div class="callout">
+    <h3>Total Def</h3>
+    <div class="row">Best: <b>2022</b> <span class="pill-good">rank 3 / 130</span></div>
+    <div class="row">Worst: <b>2006</b> <span class="pill-bad">rank 68 / 119</span></div>
+  </div><div class="callout">
+    <h3>Scoring Def</h3>
+    <div class="row">Best: <b>2022</b> <span class="pill-good">rank 2 / 130</span></div>
+    <div class="row">Worst: <b>2014</b> <span class="pill-bad">rank 50 / 128</span></div>
+  </div><div class="callout">
+    <h3>Net Punting</h3>
+    <div class="row">Best: <b>2023</b> <span class="pill-good">rank 1 / 130</span></div>
+    <div class="row">Worst: <b>2018</b> <span class="pill-bad">rank 118 / 130</span></div>
+  </div><div class="callout">
+    <h3>Punt Return</h3>
+    <div class="row">Best: <b>2025</b> <span class="pill-good">rank 1 / 134</span></div>
+    <div class="row">Worst: <b>2014</b> <span class="pill-bad">rank 104 / 128</span></div>
+  </div><div class="callout">
+    <h3>Kickoff Return</h3>
+    <div class="row">Best: <b>2002</b> <span class="pill-good">rank 1 / 117</span></div>
+    <div class="row">Worst: <b>2005</b> <span class="pill-bad">rank 115 / 117</span></div>
+  </div><div class="callout">
+    <h3>Turnover Mar</h3>
+    <div class="row">Best: <b>2021</b> <span class="pill-good">rank 3 / 130</span></div>
+    <div class="row">Worst: <b>2006</b> <span class="pill-bad">rank 111 / 119</span></div>
+  </div></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>The Full Heat Map</h2><span class="num-tag">04</span></div>
+    <p class="lede">Every category, every season. Greener = elite rank that year, redder = bottom of the country.</p>
+    <div class="heat-scroll"><table class="heat" id="heatTable"><thead><tr><th>Category</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>09</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th><th>AVG</th></tr></thead><tbody><tr><td class="catname">Rushing Off</td><td style="background:rgb(101,152,40);color:#0d0d0d;font-weight:600;">40</td><td style="background:rgb(77,181,40);color:#0d0d0d;font-weight:600;">17</td><td style="background:rgb(99,154,40);color:#0d0d0d;font-weight:600;">39</td><td style="background:rgb(179,61,40);color:#0d0d0d;font-weight:600;">116</td><td style="background:rgb(95,159,40);color:#0d0d0d;font-weight:600;">35</td><td style="background:rgb(111,141,40);color:#0d0d0d;font-weight:600;">51</td><td style="background:rgb(153,92,40);color:#0d0d0d;font-weight:600;">92</td><td style="background:rgb(85,170,40);color:#0d0d0d;font-weight:600;">26</td><td style="background:rgb(159,85,40);color:#0d0d0d;font-weight:600;">99</td><td style="background:rgb(130,119,40);color:#0d0d0d;font-weight:600;">70</td><td style="background:rgb(139,108,40);color:#0d0d0d;font-weight:600;">79</td><td style="background:rgb(158,86,40);color:#0d0d0d;font-weight:600;">101</td><td style="background:rgb(107,145,40);color:#0d0d0d;font-weight:600;">50</td><td style="background:rgb(117,134,40);color:#0d0d0d;font-weight:600;">61</td><td style="background:rgb(105,147,40);color:#0d0d0d;font-weight:600;">49</td><td style="background:rgb(123,126,40);color:#0d0d0d;font-weight:600;">68</td><td style="background:rgb(149,96,40);color:#0d0d0d;font-weight:600;">97</td><td style="background:rgb(147,98,40);color:#0d0d0d;font-weight:600;">95</td><td style="background:rgb(149,96,40);color:#0d0d0d;font-weight:600;">97</td><td style="background:rgb(114,137,40);color:#0d0d0d;font-weight:600;">58</td><td style="background:rgb(158,86,40);color:#0d0d0d;font-weight:600;">106</td><td style="background:rgb(174,67,40);color:#0d0d0d;font-weight:600;">124</td><td style="background:rgb(159,85,40);color:#0d0d0d;font-weight:600;">107</td><td style="background:rgb(81,176,40);color:#0d0d0d;font-weight:600;">24</td><td style="background:rgb(97,157,40);color:#0d0d0d;font-weight:600;">42</td><td style="color:#FFCD00;font-weight:700;">70</td></tr><tr><td class="catname">Passing Off</td><td style="background:rgb(117,134,40);color:#0d0d0d;font-weight:600;">55</td><td style="background:rgb(124,125,40);color:#0d0d0d;font-weight:600;">63</td><td style="background:rgb(167,76,40);color:#0d0d0d;font-weight:600;">104</td><td style="background:rgb(97,157,40);color:#0d0d0d;font-weight:600;">37</td><td style="background:rgb(87,169,40);color:#0d0d0d;font-weight:600;">27</td><td style="background:rgb(86,169,40);color:#0d0d0d;font-weight:600;">27</td><td style="background:rgb(155,90,40);color:#0d0d0d;font-weight:600;">94</td><td style="background:rgb(151,94,40);color:#0d0d0d;font-weight:600;">90</td><td style="background:rgb(114,136,40);color:#0d0d0d;font-weight:600;">55</td><td style="background:rgb(108,144,40);color:#0d0d0d;font-weight:600;">49</td><td style="background:rgb(118,132,40);color:#0d0d0d;font-weight:600;">59</td><td style="background:rgb(156,88,40);color:#0d0d0d;font-weight:600;">99</td><td style="background:rgb(149,96,40);color:#0d0d0d;font-weight:600;">93</td><td style="background:rgb(111,140,40);color:#0d0d0d;font-weight:600;">55</td><td style="background:rgb(143,103,40);color:#0d0d0d;font-weight:600;">89</td><td style="background:rgb(171,71,40);color:#0d0d0d;font-weight:600;">118</td><td style="background:rgb(146,100,40);color:#0d0d0d;font-weight:600;">93</td><td style="background:rgb(126,123,40);color:#0d0d0d;font-weight:600;">72</td><td style="background:rgb(122,127,40);color:#0d0d0d;font-weight:600;">68</td><td style="background:rgb(150,94,40);color:#0d0d0d;font-weight:600;">96</td><td style="background:rgb(161,82,40);color:#0d0d0d;font-weight:600;">110</td><td style="background:rgb(173,68,40);color:#0d0d0d;font-weight:600;">123</td><td style="background:rgb(177,63,40);color:#0d0d0d;font-weight:600;">127</td><td style="background:rgb(176,64,40);color:#0d0d0d;font-weight:600;">129</td><td style="background:rgb(174,67,40);color:#0d0d0d;font-weight:600;">127</td><td style="color:#FFCD00;font-weight:700;">82</td></tr><tr><td class="catname">Total Off</td><td style="background:rgb(106,146,40);color:#0d0d0d;font-weight:600;">45</td><td style="background:rgb(72,186,40);color:#0d0d0d;font-weight:600;">13</td><td style="background:rgb(154,90,40);color:#0d0d0d;font-weight:600;">92</td><td style="background:rgb(163,79,40);color:#0d0d0d;font-weight:600;">101</td><td style="background:rgb(82,175,40);color:#0d0d0d;font-weight:600;">22</td><td style="background:rgb(86,169,40);color:#0d0d0d;font-weight:600;">27</td><td style="background:rgb(170,72,40);color:#0d0d0d;font-weight:600;">109</td><td style="background:rgb(113,138,40);color:#0d0d0d;font-weight:600;">53</td><td style="background:rgb(149,96,40);color:#0d0d0d;font-weight:600;">89</td><td style="background:rgb(116,134,40);color:#0d0d0d;font-weight:600;">57</td><td style="background:rgb(136,112,40);color:#0d0d0d;font-weight:600;">76</td><td style="background:rgb(170,71,40);color:#0d0d0d;font-weight:600;">114</td><td style="background:rgb(140,106,40);color:#0d0d0d;font-weight:600;">84</td><td style="background:rgb(119,132,40);color:#0d0d0d;font-weight:600;">63</td><td style="background:rgb(127,122,40);color:#0d0d0d;font-weight:600;">72</td><td style="background:rgb(173,68,40);color:#0d0d0d;font-weight:600;">121</td><td style="background:rgb(168,74,40);color:#0d0d0d;font-weight:600;">117</td><td style="background:rgb(145,101,40);color:#0d0d0d;font-weight:600;">92</td><td style="background:rgb(151,94,40);color:#0d0d0d;font-weight:600;">99</td><td style="background:rgb(142,104,40);color:#0d0d0d;font-weight:600;">87</td><td style="background:rgb(173,68,40);color:#0d0d0d;font-weight:600;">123</td><td style="background:rgb(180,60,40);color:#0d0d0d;font-weight:600;">130</td><td style="background:rgb(180,60,40);color:#0d0d0d;font-weight:600;">130</td><td style="background:rgb(165,77,40);color:#0d0d0d;font-weight:600;">117</td><td style="background:rgb(165,78,40);color:#0d0d0d;font-weight:600;">117</td><td style="color:#FFCD00;font-weight:700;">86</td></tr><tr><td class="catname">Scoring Off</td><td style="background:rgb(82,174,40);color:#0d0d0d;font-weight:600;">22</td><td style="background:rgb(66,193,40);color:#0d0d0d;font-weight:600;">7</td><td style="background:rgb(101,152,40);color:#0d0d0d;font-weight:600;">41</td><td style="background:rgb(129,119,40);color:#0d0d0d;font-weight:600;">68</td><td style="background:rgb(96,158,40);color:#0d0d0d;font-weight:600;">36</td><td style="background:rgb(118,132,40);color:#0d0d0d;font-weight:600;">58</td><td style="background:rgb(171,71,40);color:#0d0d0d;font-weight:600;">110</td><td style="background:rgb(93,162,40);color:#0d0d0d;font-weight:600;">33</td><td style="background:rgb(146,100,40);color:#0d0d0d;font-weight:600;">86</td><td style="background:rgb(109,142,40);color:#0d0d0d;font-weight:600;">50</td><td style="background:rgb(117,133,40);color:#0d0d0d;font-weight:600;">58</td><td style="background:rgb(167,75,40);color:#0d0d0d;font-weight:600;">111</td><td style="background:rgb(136,111,40);color:#0d0d0d;font-weight:600;">80</td><td style="background:rgb(123,126,40);color:#0d0d0d;font-weight:600;">68</td><td style="background:rgb(110,142,40);color:#0d0d0d;font-weight:600;">54</td><td style="background:rgb(149,96,40);color:#0d0d0d;font-weight:600;">95</td><td style="background:rgb(120,129,40);color:#0d0d0d;font-weight:600;">66</td><td style="background:rgb(100,153,40);color:#0d0d0d;font-weight:600;">44</td><td style="background:rgb(140,107,40);color:#0d0d0d;font-weight:600;">87</td><td style="background:rgb(97,157,40);color:#0d0d0d;font-weight:600;">40</td><td style="background:rgb(140,107,40);color:#0d0d0d;font-weight:600;">87</td><td style="background:rgb(173,69,40);color:#0d0d0d;font-weight:600;">122</td><td style="background:rgb(179,61,40);color:#0d0d0d;font-weight:600;">129</td><td style="background:rgb(125,125,40);color:#0d0d0d;font-weight:600;">72</td><td style="background:rgb(108,144,40);color:#0d0d0d;font-weight:600;">54</td><td style="color:#FFCD00;font-weight:700;">67</td></tr><tr><td class="catname">Passing Efficiency</td><td style="background:rgb(69,189,40);color:#0d0d0d;font-weight:600;">10</td><td style="background:rgb(61,199,40);color:#0d0d0d;font-weight:600;">2</td><td style="background:rgb(131,117,40);color:#0d0d0d;font-weight:600;">70</td><td style="background:rgb(93,161,40);color:#0d0d0d;font-weight:600;">33</td><td style="background:rgb(86,170,40);color:#0d0d0d;font-weight:600;">26</td><td style="background:rgb(110,142,40);color:#0d0d0d;font-weight:600;">50</td><td style="background:rgb(147,98,40);color:#0d0d0d;font-weight:600;">87</td><td style="background:rgb(106,147,40);color:#0d0d0d;font-weight:600;">46</td><td style="background:rgb(143,104,40);color:#0d0d0d;font-weight:600;">83</td><td style="background:rgb(70,188,40);color:#0d0d0d;font-weight:600;">11</td><td style="background:rgb(105,147,40);color:#0d0d0d;font-weight:600;">46</td><td style="background:rgb(168,74,40);color:#0d0d0d;font-weight:600;">112</td><td style="background:rgb(139,107,40);color:#0d0d0d;font-weight:600;">83</td><td style="background:rgb(110,142,40);color:#0d0d0d;font-weight:600;">54</td><td style="background:rgb(97,157,40);color:#0d0d0d;font-weight:600;">40</td><td style="background:rgb(143,103,40);color:#0d0d0d;font-weight:600;">89</td><td style="background:rgb(104,149,40);color:#0d0d0d;font-weight:600;">48</td><td style="background:rgb(114,137,40);color:#0d0d0d;font-weight:600;">59</td><td style="background:rgb(139,108,40);color:#0d0d0d;font-weight:600;">86</td><td style="background:rgb(155,89,40);color:#0d0d0d;font-weight:600;">101</td><td style="background:rgb(165,77,40);color:#0d0d0d;font-weight:600;">114</td><td style="background:rgb(172,70,40);color:#0d0d0d;font-weight:600;">121</td><td style="background:rgb(180,60,40);color:#0d0d0d;font-weight:600;">130</td><td style="background:rgb(154,91,40);color:#0d0d0d;font-weight:600;">104</td><td style="background:rgb(138,108,40);color:#0d0d0d;font-weight:600;">88</td><td style="color:#FFCD00;font-weight:700;">68</td></tr><tr><td class="catname">Rushing Def</td><td style="background:rgb(87,168,40);color:#0d0d0d;font-weight:600;">27</td><td style="background:rgb(64,195,40);color:#0d0d0d;font-weight:600;">5</td><td style="background:rgb(67,192,40);color:#0d0d0d;font-weight:600;">8</td><td style="background:rgb(64,195,40);color:#0d0d0d;font-weight:600;">5</td><td style="background:rgb(89,166,40);color:#0d0d0d;font-weight:600;">29</td><td style="background:rgb(117,134,40);color:#0d0d0d;font-weight:600;">57</td><td style="background:rgb(83,173,40);color:#0d0d0d;font-weight:600;">24</td><td style="background:rgb(68,191,40);color:#0d0d0d;font-weight:600;">9</td><td style="background:rgb(93,161,40);color:#0d0d0d;font-weight:600;">34</td><td style="background:rgb(65,194,40);color:#0d0d0d;font-weight:600;">6</td><td style="background:rgb(122,128,40);color:#0d0d0d;font-weight:600;">62</td><td style="background:rgb(120,129,40);color:#0d0d0d;font-weight:600;">63</td><td style="background:rgb(77,180,40);color:#0d0d0d;font-weight:600;">19</td><td style="background:rgb(120,131,40);color:#0d0d0d;font-weight:600;">64</td><td style="background:rgb(73,185,40);color:#0d0d0d;font-weight:600;">15</td><td style="background:rgb(102,151,40);color:#0d0d0d;font-weight:600;">45</td><td style="background:rgb(98,156,40);color:#0d0d0d;font-weight:600;">42</td><td style="background:rgb(70,188,40);color:#0d0d0d;font-weight:600;">12</td><td style="background:rgb(72,186,40);color:#0d0d0d;font-weight:600;">14</td><td style="background:rgb(69,190,40);color:#0d0d0d;font-weight:600;">10</td><td style="background:rgb(72,186,40);color:#0d0d0d;font-weight:600;">14</td><td style="background:rgb(70,188,40);color:#0d0d0d;font-weight:600;">12</td><td style="background:rgb(73,185,40);color:#0d0d0d;font-weight:600;">15</td><td style="background:rgb(82,175,40);color:#0d0d0d;font-weight:600;">25</td><td style="background:rgb(74,183,40);color:#0d0d0d;font-weight:600;">17</td><td style="color:#FFCD00;font-weight:700;">25</td></tr><tr><td class="catname">Passing Def</td><td style="background:rgb(99,155,40);color:#0d0d0d;font-weight:600;">38</td><td style="background:rgb(173,68,40);color:#0d0d0d;font-weight:600;">110</td><td style="background:rgb(122,128,40);color:#0d0d0d;font-weight:600;">61</td><td style="background:rgb(99,154,40);color:#0d0d0d;font-weight:600;">39</td><td style="background:rgb(158,85,40);color:#0d0d0d;font-weight:600;">96</td><td style="background:rgb(132,116,40);color:#0d0d0d;font-weight:600;">72</td><td style="background:rgb(122,128,40);color:#0d0d0d;font-weight:600;">62</td><td style="background:rgb(107,145,40);color:#0d0d0d;font-weight:600;">47</td><td style="background:rgb(63,196,40);color:#0d0d0d;font-weight:600;">4</td><td style="background:rgb(144,102,40);color:#0d0d0d;font-weight:600;">84</td><td style="background:rgb(117,133,40);color:#0d0d0d;font-weight:600;">58</td><td style="background:rgb(102,151,40);color:#0d0d0d;font-weight:600;">44</td><td style="background:rgb(68,191,40);color:#0d0d0d;font-weight:600;">9</td><td style="background:rgb(66,193,40);color:#0d0d0d;font-weight:600;">7</td><td style="background:rgb(116,135,40);color:#0d0d0d;font-weight:600;">60</td><td style="background:rgb(86,169,40);color:#0d0d0d;font-weight:600;">29</td><td style="background:rgb(106,147,40);color:#0d0d0d;font-weight:600;">50</td><td style="background:rgb(75,183,40);color:#0d0d0d;font-weight:600;">17</td><td style="background:rgb(77,180,40);color:#0d0d0d;font-weight:600;">19</td><td style="background:rgb(91,163,40);color:#0d0d0d;font-weight:600;">34</td><td style="background:rgb(94,160,40);color:#0d0d0d;font-weight:600;">38</td><td style="background:rgb(66,193,40);color:#0d0d0d;font-weight:600;">7</td><td style="background:rgb(64,196,40);color:#0d0d0d;font-weight:600;">5</td><td style="background:rgb(97,157,40);color:#0d0d0d;font-weight:600;">42</td><td style="background:rgb(68,191,40);color:#0d0d0d;font-weight:600;">10</td><td style="color:#FFCD00;font-weight:700;">42</td></tr><tr><td class="catname">Pass Efficiency Def</td><td style="background:rgb(115,136,40);color:#0d0d0d;font-weight:600;">53</td><td style="background:rgb(97,157,40);color:#0d0d0d;font-weight:600;">37</td><td style="background:rgb(84,172,40);color:#0d0d0d;font-weight:600;">24</td><td style="background:rgb(77,181,40);color:#0d0d0d;font-weight:600;">17</td><td style="background:rgb(139,108,40);color:#0d0d0d;font-weight:600;">77</td><td style="background:rgb(105,148,40);color:#0d0d0d;font-weight:600;">45</td><td style="background:rgb(95,160,40);color:#0d0d0d;font-weight:600;">35</td><td style="background:rgb(64,195,40);color:#0d0d0d;font-weight:600;">5</td><td style="background:rgb(62,198,40);color:#0d0d0d;font-weight:600;">3</td><td style="background:rgb(83,173,40);color:#0d0d0d;font-weight:600;">24</td><td style="background:rgb(132,116,40);color:#0d0d0d;font-weight:600;">72</td><td style="background:rgb(132,116,40);color:#0d0d0d;font-weight:600;">75</td><td style="background:rgb(75,182,40);color:#0d0d0d;font-weight:600;">17</td><td style="background:rgb(91,164,40);color:#0d0d0d;font-weight:600;">34</td><td style="background:rgb(71,187,40);color:#0d0d0d;font-weight:600;">13</td><td style="background:rgb(77,180,40);color:#0d0d0d;font-weight:600;">19</td><td style="background:rgb(69,189,40);color:#0d0d0d;font-weight:600;">11</td><td style="background:rgb(76,182,40);color:#0d0d0d;font-weight:600;">18</td><td style="background:rgb(75,183,40);color:#0d0d0d;font-weight:600;">17</td><td style="background:rgb(66,193,40);color:#0d0d0d;font-weight:600;">7</td><td style="background:rgb(62,198,40);color:#0d0d0d;font-weight:600;">3</td><td style="background:rgb(63,197,40);color:#0d0d0d;font-weight:600;">4</td><td style="background:rgb(63,197,40);color:#0d0d0d;font-weight:600;">4</td><td style="background:rgb(97,157,40);color:#0d0d0d;font-weight:600;">42</td><td style="background:rgb(69,189,40);color:#0d0d0d;font-weight:600;">11</td><td style="color:#FFCD00;font-weight:700;">27</td></tr><tr><td class="catname">Total Def</td><td style="background:rgb(80,177,40);color:#0d0d0d;font-weight:600;">20</td><td style="background:rgb(108,144,40);color:#0d0d0d;font-weight:600;">47</td><td style="background:rgb(76,182,40);color:#0d0d0d;font-weight:600;">16</td><td style="background:rgb(70,188,40);color:#0d0d0d;font-weight:600;">11</td><td style="background:rgb(128,120,40);color:#0d0d0d;font-weight:600;">67</td><td style="background:rgb(128,121,40);color:#0d0d0d;font-weight:600;">68</td><td style="background:rgb(96,158,40);color:#0d0d0d;font-weight:600;">36</td><td style="background:rgb(71,187,40);color:#0d0d0d;font-weight:600;">12</td><td style="background:rgb(69,189,40);color:#0d0d0d;font-weight:600;">10</td><td style="background:rgb(84,172,40);color:#0d0d0d;font-weight:600;">25</td><td style="background:rgb(119,131,40);color:#0d0d0d;font-weight:600;">60</td><td style="background:rgb(107,145,40);color:#0d0d0d;font-weight:600;">49</td><td style="background:rgb(65,194,40);color:#0d0d0d;font-weight:600;">6</td><td style="background:rgb(80,177,40);color:#0d0d0d;font-weight:600;">22</td><td style="background:rgb(80,177,40);color:#0d0d0d;font-weight:600;">22</td><td style="background:rgb(81,176,40);color:#0d0d0d;font-weight:600;">23</td><td style="background:rgb(93,162,40);color:#0d0d0d;font-weight:600;">36</td><td style="background:rgb(66,193,40);color:#0d0d0d;font-weight:600;">7</td><td style="background:rgb(70,188,40);color:#0d0d0d;font-weight:600;">12</td><td style="background:rgb(67,192,40);color:#0d0d0d;font-weight:600;">8</td><td style="background:rgb(71,187,40);color:#0d0d0d;font-weight:600;">13</td><td style="background:rgb(62,198,40);color:#0d0d0d;font-weight:600;">3</td><td style="background:rgb(66,193,40);color:#0d0d0d;font-weight:600;">7</td><td style="background:rgb(77,180,40);color:#0d0d0d;font-weight:600;">20</td><td style="background:rgb(67,192,40);color:#0d0d0d;font-weight:600;">9</td><td style="color:#FFCD00;font-weight:700;">24</td></tr><tr><td class="catname">Scoring Def</td><td style="background:rgb(95,159,40);color:#0d0d0d;font-weight:600;">34</td><td style="background:rgb(84,172,40);color:#0d0d0d;font-weight:600;">24</td><td style="background:rgb(66,193,40);color:#0d0d0d;font-weight:600;">7</td><td style="background:rgb(76,182,40);color:#0d0d0d;font-weight:600;">16</td><td style="background:rgb(82,175,40);color:#0d0d0d;font-weight:600;">22</td><td style="background:rgb(105,148,40);color:#0d0d0d;font-weight:600;">45</td><td style="background:rgb(71,187,40);color:#0d0d0d;font-weight:600;">12</td><td style="background:rgb(64,195,40);color:#0d0d0d;font-weight:600;">5</td><td style="background:rgb(67,192,40);color:#0d0d0d;font-weight:600;">8</td><td style="background:rgb(66,193,40);color:#0d0d0d;font-weight:600;">7</td><td style="background:rgb(105,147,40);color:#0d0d0d;font-weight:600;">46</td><td style="background:rgb(91,164,40);color:#0d0d0d;font-weight:600;">33</td><td style="background:rgb(68,191,40);color:#0d0d0d;font-weight:600;">9</td><td style="background:rgb(106,146,40);color:#0d0d0d;font-weight:600;">50</td><td style="background:rgb(77,180,40);color:#0d0d0d;font-weight:600;">19</td><td style="background:rgb(71,187,40);color:#0d0d0d;font-weight:600;">13</td><td style="background:rgb(75,183,40);color:#0d0d0d;font-weight:600;">17</td><td style="background:rgb(69,189,40);color:#0d0d0d;font-weight:600;">11</td><td style="background:rgb(64,196,40);color:#0d0d0d;font-weight:600;">5</td><td style="background:rgb(65,194,40);color:#0d0d0d;font-weight:600;">6</td><td style="background:rgb(67,191,40);color:#0d0d0d;font-weight:600;">9</td><td style="background:rgb(61,199,40);color:#0d0d0d;font-weight:600;">2</td><td style="background:rgb(63,197,40);color:#0d0d0d;font-weight:600;">4</td><td style="background:rgb(69,189,40);color:#0d0d0d;font-weight:600;">11</td><td style="background:rgb(66,193,40);color:#0d0d0d;font-weight:600;">8</td><td style="color:#FFCD00;font-weight:700;">17</td></tr><tr><td class="catname">Net Punting</td><td style="background:rgb(162,81,40);color:#0d0d0d;font-weight:600;">98</td><td style="background:rgb(78,179,40);color:#0d0d0d;font-weight:600;">18</td><td style="background:rgb(93,161,40);color:#0d0d0d;font-weight:600;">33</td><td style="background:rgb(114,137,40);color:#0d0d0d;font-weight:600;">53</td><td style="background:rgb(111,141,40);color:#0d0d0d;font-weight:600;">50</td><td style="background:rgb(106,147,40);color:#0d0d0d;font-weight:600;">46</td><td style="background:rgb(106,147,40);color:#0d0d0d;font-weight:600;">46</td><td style="background:rgb(85,170,40);color:#0d0d0d;font-weight:600;">26</td><td style="background:rgb(91,164,40);color:#0d0d0d;font-weight:600;">32</td><td style="background:rgb(90,165,40);color:#0d0d0d;font-weight:600;">31</td><td style="background:rgb(84,172,40);color:#0d0d0d;font-weight:600;">25</td><td style="background:rgb(160,83,40);color:#0d0d0d;font-weight:600;">104</td><td style="background:rgb(104,149,40);color:#0d0d0d;font-weight:600;">46</td><td style="background:rgb(170,72,40);color:#0d0d0d;font-weight:600;">117</td><td style="background:rgb(150,95,40);color:#0d0d0d;font-weight:600;">96</td><td style="background:rgb(109,143,40);color:#0d0d0d;font-weight:600;">53</td><td style="background:rgb(165,77,40);color:#0d0d0d;font-weight:600;">114</td><td style="background:rgb(169,73,40);color:#0d0d0d;font-weight:600;">118</td><td style="background:rgb(128,121,40);color:#0d0d0d;font-weight:600;">74</td><td style="background:rgb(77,180,40);color:#0d0d0d;font-weight:600;">19</td><td style="background:rgb(85,171,40);color:#0d0d0d;font-weight:600;">28</td><td style="background:rgb(73,185,40);color:#0d0d0d;font-weight:600;">15</td><td style="background:rgb(60,200,40);color:#0d0d0d;font-weight:600;">1</td><td style="background:rgb(94,161,40);color:#0d0d0d;font-weight:600;">38</td><td style="background:rgb(123,126,40);color:#0d0d0d;font-weight:600;">71</td><td style="color:#FFCD00;font-weight:700;">54</td></tr><tr><td class="catname">Punt Return</td><td style="background:rgb(65,194,40);color:#0d0d0d;font-weight:600;">6</td><td style="background:rgb(95,159,40);color:#0d0d0d;font-weight:600;">35</td><td style="background:rgb(72,186,40);color:#0d0d0d;font-weight:600;">13</td><td style="background:rgb(74,183,40);color:#0d0d0d;font-weight:600;">15</td><td style="background:rgb(74,183,40);color:#0d0d0d;font-weight:600;">15</td><td style="background:rgb(107,145,40);color:#0d0d0d;font-weight:600;">47</td><td style="background:rgb(96,158,40);color:#0d0d0d;font-weight:600;">36</td><td style="background:rgb(103,150,40);color:#0d0d0d;font-weight:600;">43</td><td style="background:rgb(138,109,40);color:#0d0d0d;font-weight:600;">78</td><td style="background:rgb(119,131,40);color:#0d0d0d;font-weight:600;">60</td><td style="background:rgb(124,126,40);color:#0d0d0d;font-weight:600;">64</td><td style="background:rgb(133,115,40);color:#0d0d0d;font-weight:600;">76</td><td style="background:rgb(69,190,40);color:#0d0d0d;font-weight:600;">10</td><td style="background:rgb(157,86,40);color:#0d0d0d;font-weight:600;">104</td><td style="background:rgb(69,189,40);color:#0d0d0d;font-weight:600;">11</td><td style="background:rgb(69,189,40);color:#0d0d0d;font-weight:600;">11</td><td style="background:rgb(142,104,40);color:#0d0d0d;font-weight:600;">89</td><td style="background:rgb(99,154,40);color:#0d0d0d;font-weight:600;">43</td><td style="background:rgb(119,132,40);color:#0d0d0d;font-weight:600;">64</td><td style="background:rgb(90,166,40);color:#0d0d0d;font-weight:600;">32</td><td style="background:rgb(116,135,40);color:#0d0d0d;font-weight:600;">61</td><td style="background:rgb(90,165,40);color:#0d0d0d;font-weight:600;">33</td><td style="background:rgb(97,157,40);color:#0d0d0d;font-weight:600;">41</td><td style="background:rgb(83,173,40);color:#0d0d0d;font-weight:600;">26</td><td style="background:rgb(60,200,40);color:#0d0d0d;font-weight:600;">1</td><td style="color:#FFCD00;font-weight:700;">41</td></tr><tr><td class="catname">Kickoff Return</td><td style="background:rgb(129,119,40);color:#0d0d0d;font-weight:600;">67</td><td style="background:rgb(60,200,40);color:#0d0d0d;font-weight:600;">1</td><td style="background:rgb(94,160,40);color:#0d0d0d;font-weight:600;">34</td><td style="background:rgb(157,87,40);color:#0d0d0d;font-weight:600;">95</td><td style="background:rgb(178,62,40);color:#0d0d0d;font-weight:600;">115</td><td style="background:rgb(166,77,40);color:#0d0d0d;font-weight:600;">105</td><td style="background:rgb(148,97,40);color:#0d0d0d;font-weight:600;">88</td><td style="background:rgb(135,112,40);color:#0d0d0d;font-weight:600;">75</td><td style="background:rgb(97,156,40);color:#0d0d0d;font-weight:600;">38</td><td style="background:rgb(71,187,40);color:#0d0d0d;font-weight:600;">12</td><td style="background:rgb(114,136,40);color:#0d0d0d;font-weight:600;">55</td><td style="background:rgb(109,143,40);color:#0d0d0d;font-weight:600;">51</td><td style="background:rgb(112,139,40);color:#0d0d0d;font-weight:600;">55</td><td style="background:rgb(120,129,40);color:#0d0d0d;font-weight:600;">65</td><td style="background:rgb(94,160,40);color:#0d0d0d;font-weight:600;">37</td><td style="background:rgb(66,193,40);color:#0d0d0d;font-weight:600;">7</td><td style="background:rgb(73,185,40);color:#0d0d0d;font-weight:600;">15</td><td style="background:rgb(63,197,40);color:#0d0d0d;font-weight:600;">4</td><td style="background:rgb(65,195,40);color:#0d0d0d;font-weight:600;">6</td><td style="background:rgb(151,93,40);color:#0d0d0d;font-weight:600;">97</td><td style="background:rgb(72,186,40);color:#0d0d0d;font-weight:600;">14</td><td style="background:rgb(88,167,40);color:#0d0d0d;font-weight:600;">31</td><td style="background:rgb(78,179,40);color:#0d0d0d;font-weight:600;">20</td><td style="background:rgb(64,196,40);color:#0d0d0d;font-weight:600;">5</td><td style="background:rgb(76,181,40);color:#0d0d0d;font-weight:600;">19</td><td style="color:#FFCD00;font-weight:700;">44</td></tr><tr><td class="catname">Turnover Mar</td><td style="background:rgb(135,113,40);color:#0d0d0d;font-weight:600;">72</td><td style="background:rgb(71,187,40);color:#0d0d0d;font-weight:600;">12</td><td style="background:rgb(103,149,40);color:#0d0d0d;font-weight:600;">43</td><td style="background:rgb(65,194,40);color:#0d0d0d;font-weight:600;">6</td><td style="background:rgb(120,130,40);color:#0d0d0d;font-weight:600;">59</td><td style="background:rgb(172,69,40);color:#0d0d0d;font-weight:600;">111</td><td style="background:rgb(81,175,40);color:#0d0d0d;font-weight:600;">22</td><td style="background:rgb(81,175,40);color:#0d0d0d;font-weight:600;">22</td><td style="background:rgb(110,141,40);color:#0d0d0d;font-weight:600;">51</td><td style="background:rgb(66,193,40);color:#0d0d0d;font-weight:600;">7</td><td style="background:rgb(108,144,40);color:#0d0d0d;font-weight:600;">49</td><td style="background:rgb(72,186,40);color:#0d0d0d;font-weight:600;">13</td><td style="background:rgb(125,124,40);color:#0d0d0d;font-weight:600;">68</td><td style="background:rgb(155,89,40);color:#0d0d0d;font-weight:600;">102</td><td style="background:rgb(69,189,40);color:#0d0d0d;font-weight:600;">11</td><td style="background:rgb(86,170,40);color:#0d0d0d;font-weight:600;">28</td><td style="background:rgb(83,173,40);color:#0d0d0d;font-weight:600;">26</td><td style="background:rgb(74,184,40);color:#0d0d0d;font-weight:600;">16</td><td style="background:rgb(72,186,40);color:#0d0d0d;font-weight:600;">14</td><td style="background:rgb(65,194,40);color:#0d0d0d;font-weight:600;">6</td><td style="background:rgb(62,198,40);color:#0d0d0d;font-weight:600;">3</td><td style="background:rgb(84,172,40);color:#0d0d0d;font-weight:600;">27</td><td style="background:rgb(162,81,40);color:#0d0d0d;font-weight:600;">111</td><td style="background:rgb(66,193,40);color:#0d0d0d;font-weight:600;">8</td><td style="background:rgb(119,132,40);color:#0d0d0d;font-weight:600;">66</td><td style="color:#FFCD00;font-weight:700;">38</td></tr></tbody></table></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Era Comparison</h2><span class="num-tag">05</span></div>
+    <p class="lede">Splitting the 25 years into five-season eras shows the program drifting from balanced (2001-05) to defense-carries-everything (2021-25).</p>
+    <div class="chart-box med"><canvas id="eraChart" width="1120" height="306" style="display: block; box-sizing: border-box; height: 278px; width: 1018px;"></canvas></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>The 2022-2024 Offensive Collapse</h2><span class="num-tag">06</span></div>
+    <p class="lede">This is the outlier that defines recent Iowa football. Total Offense rank cratered to dead-last or near dead-last for three straight years — unprecedented anywhere else in the 25-year record — while Total Defense was simultaneously posting some of its best ranks ever (top-7 each of those same three years).</p>
+    <div class="chart-box tall"><canvas id="collapseChart" width="1120" height="372" style="display: block; box-sizing: border-box; height: 338px; width: 1018px;"></canvas></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>How It Translated to Wins</h2><span class="num-tag">07</span></div>
+    <p class="lede">Win totals, Big Ten finish, and bowl outcomes for all 25 seasons — the on-field results that the statistical rankings above were quietly building toward (or undermining).</p>
+    <div class="chart-box tall"><canvas id="winsChart" width="1120" height="372" style="display: block; box-sizing: border-box; height: 338px; width: 1018px;"></canvas></div>
+    <p class="legend-note">Bars colored by bowl game result. Diamond markers show Big Ten finish (right axis, inverted so higher on the chart = better finish).</p>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>AP Poll Trajectory</h2><span class="num-tag">08</span></div>
+    <p class="lede">Final AP ranking each season Iowa finished ranked. Gaps are seasons that ended unranked — there are twelve of them in 25 years, despite the defense rarely being bad.</p>
+    <div class="chart-box med"><canvas id="apChart" width="1120" height="306" style="display: block; box-sizing: border-box; height: 278px; width: 1018px;"></canvas></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Does Defense Or Offense Predict Wins?</h2><span class="num-tag">09</span></div>
+    <p class="lede">Plotting each season's win total against that year's offense and defense percentile shows which unit actually tracks with winning seasons at Iowa.</p>
+    <div class="two-col">
+      <div class="chart-box med"><canvas id="scatterOff" width="527" height="306" style="display: block; box-sizing: border-box; height: 278px; width: 479px;"></canvas></div>
+      <div class="chart-box med"><canvas id="scatterDef" width="527" height="306" style="display: block; box-sizing: border-box; height: 278px; width: 479px;"></canvas></div>
+    </div>
+    <p class="legend-note" id="corrNote">Correlation coefficients: offense-to-wins r = 0.06, defense-to-wins r = 0.50. Defense tracks more closely with win totals across these 25 seasons — but neither relationship is overwhelming, which fits a program that has won with very different statistical profiles.</p>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Conference Championship Heartbreak</h2><span class="num-tag">10</span></div>
+    <p class="lede">Iowa has reached the Big Ten Championship Game three times since divisions began (2015, 2021, 2023) — and lost all three, by a combined score of 32–88. All three of those teams also lost their following bowl game, turning division titles into empty-handed finishes.</p>
+    <div class="callout-grid" id="champGrid"><div class="callout">
+    <h3>2015 — 12-2, Big Ten West Champions</h3>
+    <div class="row">B1G Championship: <span class="pill-bad">L 13–16 vs Michigan State</span></div>
+    <div class="row">Bowl Game: <span class="pill-bad">L 16–45 vs Stanford (Rose Bowl)</span></div>
+    <div class="row">Total Defense rank that year: <b>22</b> &nbsp;|&nbsp; Total Offense rank: <b>72</b></div>
+  </div><div class="callout">
+    <h3>2021 — 10-4, Big Ten West Champions</h3>
+    <div class="row">B1G Championship: <span class="pill-bad">L 3–42 vs Michigan</span></div>
+    <div class="row">Bowl Game: <span class="pill-bad">L 17–20 vs Kentucky (Citrus Bowl)</span></div>
+    <div class="row">Total Defense rank that year: <b>13</b> &nbsp;|&nbsp; Total Offense rank: <b>123</b></div>
+  </div><div class="callout">
+    <h3>2023 — 10-3, Big Ten West Champions</h3>
+    <div class="row">B1G Championship: <span class="pill-bad">L 0–26 vs Michigan</span></div>
+    <div class="row">Bowl Game: <span class="pill-bad">L 0–35 vs Tennessee (Citrus Bowl)</span></div>
+    <div class="row">Total Defense rank that year: <b>7</b> &nbsp;|&nbsp; Total Offense rank: <b>130</b></div>
+  </div></div>
+  </section>
+
+  <footer>Sources: user-provided national statistical ranking data (2001–2025); season records, conference standings and bowl results from Wikipedia's "List of Iowa Hawkeyes football seasons" and individual season pages; AP final poll rankings cross-referenced with College Poll Archive. "FBS Teams" row used to normalize rank into percentile given the field size grew from 115 to 134 teams over the period. Note: the NCAA later vacated four 2023 wins (unrelated to on-field performance); the on-field record (10–3) is used here.</footer>
+</div>
+
+<script>
+const RAW = {"years": [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025], "fbs": {"2001": 115, "2002": 117, "2003": 117, "2004": 117, "2005": 117, "2006": 119, "2007": 119, "2008": 119, "2009": 120, "2010": 120, "2011": 120, "2012": 124, "2013": 125, "2014": 128, "2015": 128, "2016": 128, "2017": 130, "2018": 130, "2019": 130, "2020": 127, "2021": 130, "2022": 130, "2023": 130, "2024": 133, "2025": 134}, "data": {"Rushing Off": {"2001": 40, "2002": 17, "2003": 39, "2004": 116, "2005": 35, "2006": 51, "2007": 92, "2008": 26, "2009": 99, "2010": 70, "2011": 79, "2012": 101, "2013": 50, "2014": 61, "2015": 49, "2016": 68, "2017": 97, "2018": 95, "2019": 97, "2020": 58, "2021": 106, "2022": 124, "2023": 107, "2024": 24, "2025": 42}, "Passing Off": {"2001": 55, "2002": 63, "2003": 104, "2004": 37, "2005": 27, "2006": 27, "2007": 94, "2008": 90, "2009": 55, "2010": 49, "2011": 59, "2012": 99, "2013": 93, "2014": 55, "2015": 89, "2016": 118, "2017": 93, "2018": 72, "2019": 68, "2020": 96, "2021": 110, "2022": 123, "2023": 127, "2024": 129, "2025": 127}, "Total Off": {"2001": 45, "2002": 13, "2003": 92, "2004": 101, "2005": 22, "2006": 27, "2007": 109, "2008": 53, "2009": 89, "2010": 57, "2011": 76, "2012": 114, "2013": 84, "2014": 63, "2015": 72, "2016": 121, "2017": 117, "2018": 92, "2019": 99, "2020": 87, "2021": 123, "2022": 130, "2023": 130, "2024": 117, "2025": 117}, "Scoring Off": {"2001": 22, "2002": 7, "2003": 41, "2004": 68, "2005": 36, "2006": 58, "2007": 110, "2008": 33, "2009": 86, "2010": 50, "2011": 58, "2012": 111, "2013": 80, "2014": 68, "2015": 54, "2016": 95, "2017": 66, "2018": 44, "2019": 87, "2020": 40, "2021": 87, "2022": 122, "2023": 129, "2024": 72, "2025": 54}, "Passing Efficiency": {"2001": 10, "2002": 2, "2003": 70, "2004": 33, "2005": 26, "2006": 50, "2007": 87, "2008": 46, "2009": 83, "2010": 11, "2011": 46, "2012": 112, "2013": 83, "2014": 54, "2015": 40, "2016": 89, "2017": 48, "2018": 59, "2019": 86, "2020": 101, "2021": 114, "2022": 121, "2023": 130, "2024": 104, "2025": 88}, "Rushing Def": {"2001": 27, "2002": 5, "2003": 8, "2004": 5, "2005": 29, "2006": 57, "2007": 24, "2008": 9, "2009": 34, "2010": 6, "2011": 62, "2012": 63, "2013": 19, "2014": 64, "2015": 15, "2016": 45, "2017": 42, "2018": 12, "2019": 14, "2020": 10, "2021": 14, "2022": 12, "2023": 15, "2024": 25, "2025": 17}, "Passing Def": {"2001": 38, "2002": 110, "2003": 61, "2004": 39, "2005": 96, "2006": 72, "2007": 62, "2008": 47, "2009": 4, "2010": 84, "2011": 58, "2012": 44, "2013": 9, "2014": 7, "2015": 60, "2016": 29, "2017": 50, "2018": 17, "2019": 19, "2020": 34, "2021": 38, "2022": 7, "2023": 5, "2024": 42, "2025": 10}, "Pass Efficiency Def": {"2001": 53, "2002": 37, "2003": 24, "2004": 17, "2005": 77, "2006": 45, "2007": 35, "2008": 5, "2009": 3, "2010": 24, "2011": 72, "2012": 75, "2013": 17, "2014": 34, "2015": 13, "2016": 19, "2017": 11, "2018": 18, "2019": 17, "2020": 7, "2021": 3, "2022": 4, "2023": 4, "2024": 42, "2025": 11}, "Total Def": {"2001": 20, "2002": 47, "2003": 16, "2004": 11, "2005": 67, "2006": 68, "2007": 36, "2008": 12, "2009": 10, "2010": 25, "2011": 60, "2012": 49, "2013": 6, "2014": 22, "2015": 22, "2016": 23, "2017": 36, "2018": 7, "2019": 12, "2020": 8, "2021": 13, "2022": 3, "2023": 7, "2024": 20, "2025": 9}, "Scoring Def": {"2001": 34, "2002": 24, "2003": 7, "2004": 16, "2005": 22, "2006": 45, "2007": 12, "2008": 5, "2009": 8, "2010": 7, "2011": 46, "2012": 33, "2013": 9, "2014": 50, "2015": 19, "2016": 13, "2017": 17, "2018": 11, "2019": 5, "2020": 6, "2021": 9, "2022": 2, "2023": 4, "2024": 11, "2025": 8}, "Net Punting": {"2001": 98, "2002": 18, "2003": 33, "2004": 53, "2005": 50, "2006": 46, "2007": 46, "2008": 26, "2009": 32, "2010": 31, "2011": 25, "2012": 104, "2013": 46, "2014": 117, "2015": 96, "2016": 53, "2017": 114, "2018": 118, "2019": 74, "2020": 19, "2021": 28, "2022": 15, "2023": 1, "2024": 38, "2025": 71}, "Punt Return": {"2001": 6, "2002": 35, "2003": 13, "2004": 15, "2005": 15, "2006": 47, "2007": 36, "2008": 43, "2009": 78, "2010": 60, "2011": 64, "2012": 76, "2013": 10, "2014": 104, "2015": 11, "2016": 11, "2017": 89, "2018": 43, "2019": 64, "2020": 32, "2021": 61, "2022": 33, "2023": 41, "2024": 26, "2025": 1}, "Kickoff Return": {"2001": 67, "2002": 1, "2003": 34, "2004": 95, "2005": 115, "2006": 105, "2007": 88, "2008": 75, "2009": 38, "2010": 12, "2011": 55, "2012": 51, "2013": 55, "2014": 65, "2015": 37, "2016": 7, "2017": 15, "2018": 4, "2019": 6, "2020": 97, "2021": 14, "2022": 31, "2023": 20, "2024": 5, "2025": 19}, "Turnover Mar": {"2001": 72, "2002": 12, "2003": 43, "2004": 6, "2005": 59, "2006": 111, "2007": 22, "2008": 22, "2009": 51, "2010": 7, "2011": 49, "2012": 13, "2013": 68, "2014": 102, "2015": 11, "2016": 28, "2017": 26, "2018": 16, "2019": 14, "2020": 6, "2021": 3, "2022": 27, "2023": 111, "2024": 8, "2025": 66}}};
+const SEASONS = {"2001": {"wins": 7, "losses": 5, "conf_w": 4, "conf_l": 4, "finish": 4, "bowl": "W", "bowl_name": "Alamo", "ap_final": null, "champ_game": null}, "2002": {"wins": 11, "losses": 2, "conf_w": 8, "conf_l": 0, "finish": 1, "bowl": "L", "bowl_name": "Orange", "ap_final": 8, "champ_game": null}, "2003": {"wins": 10, "losses": 3, "conf_w": 5, "conf_l": 3, "finish": 4, "bowl": "W", "bowl_name": "Outback", "ap_final": 8, "champ_game": null}, "2004": {"wins": 10, "losses": 2, "conf_w": 7, "conf_l": 1, "finish": 1, "bowl": "W", "bowl_name": "Capital One", "ap_final": 8, "champ_game": null}, "2005": {"wins": 7, "losses": 5, "conf_w": 5, "conf_l": 3, "finish": 3, "bowl": "L", "bowl_name": "Outback", "ap_final": null, "champ_game": null}, "2006": {"wins": 6, "losses": 7, "conf_w": 2, "conf_l": 6, "finish": 8, "bowl": "L", "bowl_name": "Alamo", "ap_final": null, "champ_game": null}, "2007": {"wins": 6, "losses": 6, "conf_w": 4, "conf_l": 4, "finish": 5, "bowl": null, "bowl_name": null, "ap_final": null, "champ_game": null}, "2008": {"wins": 9, "losses": 4, "conf_w": 5, "conf_l": 3, "finish": 4, "bowl": "W", "bowl_name": "Outback", "ap_final": 20, "champ_game": null}, "2009": {"wins": 11, "losses": 2, "conf_w": 6, "conf_l": 2, "finish": 2, "bowl": "W", "bowl_name": "Orange", "ap_final": 7, "champ_game": null}, "2010": {"wins": 8, "losses": 5, "conf_w": 4, "conf_l": 4, "finish": 4, "bowl": "W", "bowl_name": "Insight", "ap_final": null, "champ_game": null}, "2011": {"wins": 7, "losses": 6, "conf_w": 4, "conf_l": 4, "finish": 4, "bowl": "L", "bowl_name": "Insight", "ap_final": null, "champ_game": null}, "2012": {"wins": 4, "losses": 8, "conf_w": 2, "conf_l": 6, "finish": 5, "bowl": null, "bowl_name": null, "ap_final": null, "champ_game": null}, "2013": {"wins": 8, "losses": 5, "conf_w": 5, "conf_l": 3, "finish": 2, "bowl": "L", "bowl_name": "Outback", "ap_final": null, "champ_game": null}, "2014": {"wins": 7, "losses": 6, "conf_w": 4, "conf_l": 4, "finish": 4, "bowl": "L", "bowl_name": "TaxSlayer", "ap_final": null, "champ_game": null}, "2015": {"wins": 12, "losses": 2, "conf_w": 8, "conf_l": 0, "finish": 1, "bowl": "L", "bowl_name": "Rose", "ap_final": 9, "champ_game": "L"}, "2016": {"wins": 8, "losses": 5, "conf_w": 6, "conf_l": 3, "finish": 2, "bowl": "L", "bowl_name": "Outback", "ap_final": null, "champ_game": null}, "2017": {"wins": 8, "losses": 5, "conf_w": 4, "conf_l": 5, "finish": 3, "bowl": "W", "bowl_name": "Pinstripe", "ap_final": null, "champ_game": null}, "2018": {"wins": 9, "losses": 4, "conf_w": 5, "conf_l": 4, "finish": 2, "bowl": "W", "bowl_name": "Outback", "ap_final": 25, "champ_game": null}, "2019": {"wins": 10, "losses": 3, "conf_w": 6, "conf_l": 3, "finish": 3, "bowl": "W", "bowl_name": "Holiday", "ap_final": 15, "champ_game": null}, "2020": {"wins": 6, "losses": 2, "conf_w": 6, "conf_l": 2, "finish": 2, "bowl": "C", "bowl_name": "Music City (canceled)", "ap_final": 16, "champ_game": null}, "2021": {"wins": 10, "losses": 4, "conf_w": 7, "conf_l": 2, "finish": 1, "bowl": "L", "bowl_name": "Citrus", "ap_final": 23, "champ_game": "L"}, "2022": {"wins": 8, "losses": 5, "conf_w": 5, "conf_l": 4, "finish": 2, "bowl": "W", "bowl_name": "Music City", "ap_final": null, "champ_game": null}, "2023": {"wins": 10, "losses": 3, "conf_w": 6, "conf_l": 2, "finish": 1, "bowl": "L", "bowl_name": "Citrus", "ap_final": 24, "champ_game": "L"}, "2024": {"wins": 8, "losses": 5, "conf_w": 6, "conf_l": 3, "finish": 5, "bowl": "L", "bowl_name": "Music City", "ap_final": null, "champ_game": null}, "2025": {"wins": 9, "losses": 4, "conf_w": 6, "conf_l": 3, "finish": 6, "bowl": "W", "bowl_name": "ReliaQuest", "ap_final": 17, "champ_game": null}};
+const years = RAW.years;
+const fbs = RAW.fbs;
+const data = RAW.data;
+
+const OFF_CATS = ["Rushing Off","Passing Off","Total Off","Scoring Off","Passing Efficiency"];
+const DEF_CATS = ["Rushing Def","Passing Def","Pass Efficiency Def","Total Def","Scoring Def"];
+const ST_CATS  = ["Net Punting","Punt Return","Kickoff Return"];
+const OTHER_CATS = ["Turnover Mar"];
+
+function pct(cat,y){ // percentile, higher better
+  const rank = data[cat][y];
+  const n = fbs[y];
+  return (1 - (rank-1)/(n-1))*100;
+}
+function avgPct(cats,y){
+  return cats.reduce((s,c)=>s+pct(c,y),0)/cats.length;
+}
+
+const GOLD = "#FFCD00";
+const CREAM = "#f5f1e6";
+Chart.defaults.color = "#ccc";
+Chart.defaults.borderColor = "#2a2a2a";
+Chart.defaults.font.family = "'Oswald','Arial Narrow',Arial,sans-serif";
+
+// ---- Stat strip ----
+function statCard(num, lab, sub){
+  return `<div class="stat-card"><div class="num">${num}</div><div class="lab">${lab}</div><div class="sub">${sub||''}</div></div>`;
+}
+const offAvg = years.reduce((s,y)=>s+avgPct(OFF_CATS,y),0)/years.length;
+const defAvg = years.reduce((s,y)=>s+avgPct(DEF_CATS,y),0)/years.length;
+// find best overall season (avg percentile across all categories)
+const ALL_CATS = Object.keys(data);
+let bestYear=years[0], bestVal=-1, worstYear=years[0], worstVal=999;
+years.forEach(y=>{
+  const v = avgPct(ALL_CATS,y);
+  if(v>bestVal){bestVal=v;bestYear=y;}
+  if(v<worstVal){worstVal=v;worstYear=y;}
+});
+document.getElementById('statStrip').innerHTML = [
+  statCard(defAvg.toFixed(0)+"%ile","25-yr Avg Defense","vs "+offAvg.toFixed(0)+"%ile offense"),
+  statCard("#"+data["Total Def"][2022], "Best Total D Rank", "2022, out of "+fbs[2022]+" teams"),
+  statCard("#"+data["Total Off"][2022]+"/"+data["Total Off"][2023], "Worst Total Off Ranks","back-to-back, 2022 & 2023"),
+  statCard(bestYear, "Best All-Around Season", worstYear+" was the worst")
+].join("");
+
+// ---- Off vs Def chart ----
+new Chart(document.getElementById('offDefChart'), {
+  type:'line',
+  data:{
+    labels:years,
+    datasets:[
+      {label:'Offense (avg percentile)', data:years.map(y=>avgPct(OFF_CATS,y)), borderColor:'#5b8fd6', backgroundColor:'transparent', tension:0.25, borderWidth:2.5, pointRadius:3},
+      {label:'Defense (avg percentile)', data:years.map(y=>avgPct(DEF_CATS,y)), borderColor:GOLD, backgroundColor:'transparent', tension:0.25, borderWidth:2.5, pointRadius:3},
+      {label:'Special Teams (avg percentile)', data:years.map(y=>avgPct(ST_CATS,y)), borderColor:'#888', backgroundColor:'transparent', tension:0.25, borderWidth:1.5, pointRadius:2, borderDash:[4,3]}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    interaction:{mode:'index', intersect:false},
+    scales:{ y:{min:0,max:100, title:{display:true,text:'Percentile (100 = #1 in nation)'}} },
+    plugins:{ legend:{position:'top'} }
+  }
+});
+
+// ---- Category toggle chart ----
+const groups = {Offense:OFF_CATS, Defense:DEF_CATS, "Special Teams":ST_CATS, "Turnovers":OTHER_CATS};
+const palette = ["#FFCD00","#5b8fd6","#b3392b","#2e7d4f","#a36fd9","#d98a3d"];
+let catChart;
+function renderCatChart(groupName){
+  const cats = groups[groupName];
+  const datasets = cats.map((c,i)=>({
+    label:c,
+    data:years.map(y=>data[c][y]),
+    borderColor:palette[i%palette.length],
+    backgroundColor:'transparent',
+    tension:0.25, borderWidth:2, pointRadius:2
+  }));
+  if(catChart) catChart.destroy();
+  catChart = new Chart(document.getElementById('categoryChart'), {
+    type:'line',
+    data:{labels:years, datasets},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      scales:{ y:{reverse:true, title:{display:true,text:'National Rank (lower = better, reversed axis)'}} },
+      plugins:{legend:{position:'top'}}
+    }
+  });
+}
+const toggleRow = document.getElementById('catToggle');
+Object.keys(groups).forEach((g,i)=>{
+  const b=document.createElement('button');
+  b.className='toggle-btn'+(i===1?' active':'');
+  b.textContent=g;
+  b.onclick=()=>{
+    [...toggleRow.children].forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    renderCatChart(g);
+  };
+  toggleRow.appendChild(b);
+});
+renderCatChart('Defense');
+
+// ---- Best/Worst grid ----
+const bw = document.getElementById('bestWorstGrid');
+ALL_CATS.forEach(cat=>{
+  const yd = data[cat];
+  let by=years[0],bv=9999,wy=years[0],wv=-1;
+  years.forEach(y=>{ if(yd[y]<bv){bv=yd[y];by=y;} if(yd[y]>wv){wv=yd[y];wy=y;} });
+  bw.innerHTML += `<div class="callout">
+    <h3>${cat}</h3>
+    <div class="row">Best: <b>${by}</b> <span class="pill-good">rank ${bv} / ${fbs[by]}</span></div>
+    <div class="row">Worst: <b>${wy}</b> <span class="pill-bad">rank ${wv} / ${fbs[wy]}</span></div>
+  </div>`;
+});
+
+// ---- Heat map table ----
+function heatColor(cat,y){
+  const p = pct(cat,y)/100; // 0..1, 1 = best
+  // green (good) to red (bad)
+  const r = Math.round(180 - p*120);
+  const g = Math.round(60 + p*140);
+  const b = 40;
+  return `rgb(${r},${g},${b})`;
+}
+let thead = '<tr><th>Category</th>'+years.map(y=>`<th>${String(y).slice(2)}</th>`).join('')+'<th>AVG</th></tr>';
+let tbody = '';
+ALL_CATS.forEach(cat=>{
+  let cells = years.map(y=>{
+    const rank = data[cat][y];
+    return `<td style="background:${heatColor(cat,y)};color:#0d0d0d;font-weight:600;">${rank}</td>`;
+  }).join('');
+  const avg = (years.reduce((s,y)=>s+data[cat][y],0)/years.length).toFixed(0);
+  tbody += `<tr><td class="catname">${cat}</td>${cells}<td style="color:${GOLD};font-weight:700;">${avg}</td></tr>`;
+});
+document.getElementById('heatTable').innerHTML = `<thead>${thead}</thead><tbody>${tbody}</tbody>`;
+
+// ---- Era chart ----
+const eras = [[2001,2005],[2006,2010],[2011,2015],[2016,2020],[2021,2025]];
+const eraLabels = eras.map(e=>e[0]+'–'+e[1]);
+function eraAvg(cats, era){
+  const ys = years.filter(y=>y>=era[0] && y<=era[1]);
+  return ys.reduce((s,y)=>s+avgPct(cats,y),0)/ys.length;
+}
+new Chart(document.getElementById('eraChart'), {
+  type:'bar',
+  data:{
+    labels:eraLabels,
+    datasets:[
+      {label:'Offense', data:eras.map(e=>eraAvg(OFF_CATS,e)), backgroundColor:'#5b8fd6'},
+      {label:'Defense', data:eras.map(e=>eraAvg(DEF_CATS,e)), backgroundColor:GOLD},
+      {label:'Special Teams', data:eras.map(e=>eraAvg(ST_CATS,e)), backgroundColor:'#888'}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    scales:{ y:{min:0,max:100,title:{display:true,text:'Avg Percentile'}} },
+    plugins:{legend:{position:'top'}}
+  }
+});
+
+// ---- Collapse chart 2018-2025 Total Off vs Total Def ----
+const recentYears = years.filter(y=>y>=2018);
+new Chart(document.getElementById('collapseChart'), {
+  type:'line',
+  data:{
+    labels:recentYears,
+    datasets:[
+      {label:'Total Offense Rank', data:recentYears.map(y=>data["Total Off"][y]), borderColor:'#b3392b', backgroundColor:'rgba(179,57,43,0.15)', fill:true, tension:0.2, borderWidth:2.5, pointRadius:4},
+      {label:'Total Defense Rank', data:recentYears.map(y=>data["Total Def"][y]), borderColor:GOLD, backgroundColor:'rgba(255,205,0,0.1)', fill:true, tension:0.2, borderWidth:2.5, pointRadius:4}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    scales:{ y:{reverse:true, title:{display:true,text:'National Rank (lower=better, reversed)'}} },
+    plugins:{legend:{position:'top'}}
+  }
+});
+
+// ============ NEW SECTIONS ============
+
+// ---- Wins / Bowl / Finish chart ----
+const bowlColor = {W:'#2e7d4f', L:'#b3392b', C:'#888', "null":'#444'};
+function bowlColorOf(y){
+  const b = SEASONS[y].bowl;
+  return b ? (bowlColor[b]||'#444') : '#444';
+}
+new Chart(document.getElementById('winsChart'), {
+  data:{
+    labels:years,
+    datasets:[
+      {
+        type:'bar',
+        label:'Wins',
+        data:years.map(y=>SEASONS[y].wins),
+        backgroundColor:years.map(y=>bowlColorOf(y)),
+        yAxisID:'y'
+      },
+      {
+        type:'line',
+        label:'Big Ten Finish (lower=better)',
+        data:years.map(y=>SEASONS[y].finish),
+        borderColor:CREAM,
+        backgroundColor:CREAM,
+        borderWidth:1.5,
+        pointStyle:'rectRot',
+        pointRadius:5,
+        yAxisID:'y1',
+        tension:0
+      }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    scales:{
+      y:{ min:0, max:14, title:{display:true,text:'Wins'} },
+      y1:{ reverse:true, min:0, max:10, position:'right', grid:{drawOnChartArea:false}, title:{display:true,text:'B1G Finish'} }
+    },
+    plugins:{
+      legend:{position:'top'},
+      tooltip:{ callbacks:{ afterBody:(items)=>{
+        const y = items[0].label;
+        const s = SEASONS[y];
+        const bowlTxt = s.bowl ? `${s.bowl==='W'?'Won':s.bowl==='L'?'Lost':'Canceled'} ${s.bowl_name} Bowl` : 'No bowl';
+        return [`Record: ${s.wins}-${s.losses} (${s.conf_w}-${s.conf_l} B1G)`, bowlTxt];
+      }}}
+    }
+  }
+});
+
+// ---- AP Poll chart ----
+const apYears = years.filter(y=>SEASONS[y].ap_final);
+new Chart(document.getElementById('apChart'), {
+  type:'scatter',
+  data:{
+    datasets:[{
+      label:'AP Final Rank',
+      data:apYears.map(y=>({x:y, y:SEASONS[y].ap_final})),
+      backgroundColor:GOLD,
+      borderColor:GOLD,
+      pointRadius:6,
+      showLine:true,
+      borderWidth:1,
+      segment:{borderDash:ctx=> (ctx.p1.parsed.x-ctx.p0.parsed.x>1)?[4,4]:undefined}
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    scales:{
+      x:{type:'linear', min:2000.5, max:2025.5, ticks:{stepSize:1, callback:v=>Math.round(v)}, title:{display:true,text:'Season'}},
+      y:{reverse:true, min:0, max:26, title:{display:true,text:'Final AP Rank'}}
+    },
+    plugins:{legend:{display:false}, tooltip:{callbacks:{label:(c)=>`#${c.parsed.y} in final AP poll`}}}
+  }
+});
+
+// ---- Scatter: wins vs offense/defense percentile ----
+function corr(xs,ys){
+  const n=xs.length;
+  const mx=xs.reduce((a,b)=>a+b,0)/n, my=ys.reduce((a,b)=>a+b,0)/n;
+  let num=0,dx=0,dy=0;
+  for(let i=0;i<n;i++){ num+=(xs[i]-mx)*(ys[i]-my); dx+=(xs[i]-mx)**2; dy+=(ys[i]-my)**2; }
+  return num/Math.sqrt(dx*dy);
+}
+const winsArr = years.map(y=>SEASONS[y].wins);
+const offArr = years.map(y=>avgPct(OFF_CATS,y));
+const defArr = years.map(y=>avgPct(DEF_CATS,y));
+const rOff = corr(offArr, winsArr);
+const rDef = corr(defArr, winsArr);
+
+new Chart(document.getElementById('scatterOff'), {
+  type:'scatter',
+  data:{datasets:[{label:'Offense %ile vs Wins', data:years.map(y=>({x:avgPct(OFF_CATS,y), y:SEASONS[y].wins})), backgroundColor:'#5b8fd6', pointRadius:5}]},
+  options:{responsive:true, maintainAspectRatio:false,
+    scales:{x:{title:{display:true,text:'Offense Percentile'}}, y:{title:{display:true,text:'Wins'},min:0,max:14}},
+    plugins:{legend:{display:false}, title:{display:true,text:`Offense vs Wins  (r = ${rOff.toFixed(2)})`,color:'#ccc',font:{size:13}}}
+  }
+});
+new Chart(document.getElementById('scatterDef'), {
+  type:'scatter',
+  data:{datasets:[{label:'Defense %ile vs Wins', data:years.map(y=>({x:avgPct(DEF_CATS,y), y:SEASONS[y].wins})), backgroundColor:GOLD, pointRadius:5}]},
+  options:{responsive:true, maintainAspectRatio:false,
+    scales:{x:{title:{display:true,text:'Defense Percentile'}}, y:{title:{display:true,text:'Wins'},min:0,max:14}},
+    plugins:{legend:{display:false}, title:{display:true,text:`Defense vs Wins  (r = ${rDef.toFixed(2)})`,color:'#ccc',font:{size:13}}}
+  }
+});
+document.getElementById('corrNote').innerHTML =
+  `Correlation coefficients: offense-to-wins r = ${rOff.toFixed(2)}, defense-to-wins r = ${rDef.toFixed(2)}. ` +
+  (Math.abs(rDef) > Math.abs(rOff)
+    ? `Defense tracks more closely with win totals across these 25 seasons — but neither relationship is overwhelming, which fits a program that has won with very different statistical profiles.`
+    : `Offense tracks more closely with win totals across these 25 seasons.`);
+
+// ---- Championship game heartbreak ----
+const champYears = years.filter(y=>SEASONS[y].champ_game);
+const champGames = {
+  2015: {score:"13–16", opp:"Michigan State", bowlScore:"16–45", bowlOpp:"Stanford (Rose Bowl)"},
+  2021: {score:"3–42", opp:"Michigan", bowlScore:"17–20", bowlOpp:"Kentucky (Citrus Bowl)"},
+  2023: {score:"0–26", opp:"Michigan", bowlScore:"0–35", bowlOpp:"Tennessee (Citrus Bowl)"}
+};
+const cg = document.getElementById('champGrid');
+champYears.forEach(y=>{
+  const c = champGames[y];
+  cg.innerHTML += `<div class="callout">
+    <h3>${y} — ${SEASONS[y].wins}-${SEASONS[y].losses}, Big Ten West Champions</h3>
+    <div class="row">B1G Championship: <span class="pill-bad">L ${c.score} vs ${c.opp}</span></div>
+    <div class="row">Bowl Game: <span class="pill-bad">L ${c.bowlScore} vs ${c.bowlOpp}</span></div>
+    <div class="row">Total Defense rank that year: <b>${data["Total Def"][y]}</b> &nbsp;|&nbsp; Total Offense rank: <b>${data["Total Off"][y]}</b></div>
+  </div>`;
+});
+</script>
+
+
+</body></html>
